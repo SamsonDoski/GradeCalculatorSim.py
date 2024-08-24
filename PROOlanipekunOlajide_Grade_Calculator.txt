@@ -178,24 +178,4 @@ the following assignments and exams:")
         
     
     
-
-
-
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
