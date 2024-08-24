@@ -1,0 +1,201 @@
+'''
+Name: Olajide Olanipekun
+Date: 11/6/2023
+Project Topic(s): Graphical User Interface, Object Oriented Programming/Classes,
+Modularization, Lists and Loops.
+Project Description: This Program works as a GUI based Grade Calculator Object Oriented Program.
+Using the features learned this semester, the program will recieve raw scores from the user using the GUI
+design, and compute the weigted average and corresponding letter grade recieved Using OOP. 
+
+'''
+# import tkinter module    
+from tkinter import *
+
+# import messagebox class
+from tkinter import messagebox
+
+# List CONSTANTS
+gradeLst = [0.05, 0.20, 0.10, 0.15, 0.25]
+
+
+def main():
+    class COURSE:
+        def __init__(self):
+            self.__gui = Tk()
+
+        # getters
+
+        def getGui(self):
+            return self.__gui
+
+        # setters
+        def setGui(self, newGui):
+            self.__gui = newGui
+            return self.__gui
+            
+        # create a gui window
+        def determine_grade(self, average):
+            if average >= 89.45:
+                return "A"
+            elif average >= 79.45:
+                return "B"
+            elif average >= 69.45:
+                return "C"
+            elif average >= 59.45:
+                return "D"
+            else:
+                return "F"
+
+
+        def calc_average(self):
+            avg = 0
+            try:
+                disc = float(discStr.get())
+                quiz = float(quizStr.get())
+                revel = float(revelStr.get())
+                project = float(projectStr.get())
+                exam1 = float(exam1Str.get())
+                final = float(finalStr.get())
+
+                avg = avg + disc * gradeLst[0]
+                avg = avg + quiz * gradeLst[1]
+                avg = avg + revel * gradeLst[2]
+                avg = avg + project * gradeLst[3]
+                avg = avg + exam1 * gradeLst[4]
+                avg = avg + final * gradeLst[4]
+
+                # find grd
+                grd = str(round(avg, 2))+"/"+ self.determine_grade(avg)
+
+                # set value
+                resultStr.set(grd)
+            except:
+                messagebox.showinfo("Error!", "Non-Numeric or Blank Data Entered")
+
+                
+        def clear_entries(self):
+            discStr.set("")
+            revelStr.set("")
+            quizStr.set("")
+            projectStr.set("")
+            exam1Str.set("")
+            finalStr.set("")
+            resultStr.set("")
+
+
+        def quit_program(self):
+            self.getGui().destroy()
+
+    COSC = COURSE()
+        # Driver code
+    if __name__ == "__main__":
+        # set title of GUI window
+        COSC.getGui().title("COSC1437 Weighted Average and Overall Grade")
+
+        # set size of GUI window
+        COSC.getGui().geometry("400x400")
+
+        # header of GUI window
+        introLabel = Label(COSC.getGui(), text = "Enter your raw score for \
+the following assignments and exams:")
+        introLabel.grid(columnspan=2, rowspan = 2)
+        
+        # Discussion Score entry
+        discLabel = Label(COSC.getGui(), text = "\t\tDiscussions (5%)")
+        discLabel.grid(row=2, column=0, columnspan=1)
+        discStr = StringVar()
+        discEntry = Entry(COSC.getGui(), textvariable = discStr)
+        discEntry.grid(row=2, column=1, columnspan=2)
+
+        # Quiz score entry
+        quizLabel = Label(COSC.getGui(), text = "\t\t     Quizzes (20%)")
+        quizLabel.grid(row=3, column=0)
+        quizStr = StringVar()
+        quizEntry = Entry(COSC.getGui(), textvariable = quizStr)
+        quizEntry.grid(row=3, column=1)
+
+        # Revel Score entry
+        revelLabel = Label(COSC.getGui(), text = "\t\tRevel Labs (10%)")
+        revelLabel.grid(row=4, column=0, columnspan=1)
+        revelStr = StringVar()
+        revelEntry = Entry(COSC.getGui(), textvariable = revelStr)
+        revelEntry.grid(row=4, column=1)
+
+        # Project Score entry
+        projectLabel = Label(COSC.getGui(), text = "\t     Program/Project (15%)")
+        projectLabel.grid(row=5, column=0)
+        projectStr = StringVar()
+        projectEntry = Entry(COSC.getGui(), textvariable = projectStr)
+        projectEntry.grid(row=5, column=1)
+
+        # Mid-term Score entry
+        exam1Label = Label(COSC.getGui(), text = "\t      Mid-Term Exam (25%)")
+        exam1Label.grid(row=6, column=0)
+        exam1Str = StringVar()
+        exam1Entry = Entry(COSC.getGui(), textvariable = exam1Str)
+        exam1Entry.grid(row=6, column=1)
+
+        # Final Exam Score entry
+        finalLabel = Label(COSC.getGui(), text = "\t\tFinal Exam (25%)")
+        finalLabel.grid(row=7, column=0)
+        finalStr = StringVar()
+        finalEntry = Entry(COSC.getGui(), textvariable = finalStr)
+        finalEntry.grid(row=7, column=1)
+
+        # blank space
+        blankLabel = Label(COSC.getGui(), text = "")
+        blankLabel.grid(row=8)
+
+        # Calculate button
+        calButton = Button(COSC.getGui(), text="Calculate Weighted Average/Grade",\
+                           fg='black',\
+                           command=lambda: COSC.calc_average())
+
+        calButton.grid(row=10, column=0)
+        resultStr = StringVar()
+        resultLabel = Label(COSC.getGui(), textvariable = resultStr, borderwidth=2,\
+                            relief="solid", width = 12)
+        resultLabel.grid(row=10, column=1)
+
+        # empty label for space
+        blankLabel = Label(COSC.getGui(), text = "")
+        blankLabel.grid(row=11)
+
+        # clear button
+        clearButton = Button(COSC.getGui(), text=' Clear ', fg='black',\
+                             command=lambda: COSC.clear_entries())
+        clearButton.grid(row=12, column=0, sticky= E)
+        clearButton.columnconfigure(1, weight = 1)
+
+        # quit button
+        quitButton = Button(COSC.getGui(), text=' Quit ', fg='black',\
+                            command=lambda: COSC.quit_program())
+        quitButton.grid(row=12, column=1, sticky=W)
+        quitButton.columnconfigure(1, weight = 1)
+
+        # Start GUI
+        COSC.getGui().mainloop()
+        
+    
+    
+
+
+
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
